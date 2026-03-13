@@ -17,10 +17,16 @@ function Login() {
       [event.target.id]: event.target.value,
     });
   };
-
-  const login = (event) => {
-    event.preventDefault(); // Prevent form from refreshing the page
-    dispatch(submitLogin(details));
+  const [message, setMessage] = useState("");
+  const login = async (event) => {
+    event.preventDefault(); // Prevent form refresh
+  
+    try {
+      await dispatch(submitLogin(details));
+      setMessage("✅ Login successful!");
+    } catch (error) {
+      setMessage("❌ Login failed. Check your credentials.");
+    }
   };
 
   return (
@@ -48,6 +54,7 @@ function Login() {
             />
         </Form.Group>
         <Button type="submit">Sign in</Button> {/* Use type="submit" */}
+        {message && <p className="mt-3">{message}</p>}
         </Form>
     </div>
   );

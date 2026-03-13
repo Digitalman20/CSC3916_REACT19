@@ -19,9 +19,19 @@ function Register() {
         });
     };
 
-    const register = () => {
-        dispatch(submitRegister(details));
+
+    const [message, setMessage] = useState("");
+
+    const register = async () => {
+        try {
+            await dispatch(submitRegister(details));
+            setMessage("✅ Account created successfully!");
+        } catch (error) {
+            setMessage("❌ Registration failed. Try again.");
+        }
     };
+
+    
 
     return (
         <div className="register-container">
@@ -41,6 +51,7 @@ function Register() {
                     <Form.Control onChange={updateDetails} value={details.password} autoComplete="current-password" type="password" placeholder="Password" />
                 </Form.Group>
                 <Button onClick={register}>Register</Button>
+                {message && <p className="mt-3">{message}</p>}
             </Form>
         </div>
     );
