@@ -23,9 +23,9 @@ function Login() {
   
     try {
       await dispatch(submitLogin(details));
-      setMessage("✅ Login successful!");
+      setMessage("Login successful!");
     } catch (error) {
-      setMessage("❌ Login failed. Check your credentials.");
+      setMessage("Login failed. Check your credentials.");
     }
   };
 
